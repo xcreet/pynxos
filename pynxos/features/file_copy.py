@@ -139,12 +139,12 @@ class FileCopy(object):
             look_for_keys=False)
 
         full_remote_path = '{}{}'.format(self.file_system, self.dst)
-        scp = SCPClient(ssh.get_transport())
+        scp = SCPClient(ssh.get_transport(), progress=progress_callback)
         try:
             if pull:
                 scp.get(full_remote_path, self.src)
             else:
-                scp.put(self.src, full_remote_path, progress=progress_callback)
+                scp.put(self.src, full_remote_path)
         except:
             raise FileTransferError(
                 'Could not transfer file. There was an error during transfer. Please make sure remote permissions are set.')
