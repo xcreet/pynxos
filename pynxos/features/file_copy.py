@@ -94,7 +94,7 @@ class FileCopy(object):
                     buf = f.read(blocksize)
             return m.hexdigest()
 
-    def transfer_file(self, hostname=None, username=None, password=None, pull=False):
+    def transfer_file(self, hostname=None, username=None, password=None, pull=False, progress_callback=None):
         """Transfer the file to the remote device over SCP.
 
         Note:
@@ -144,7 +144,7 @@ class FileCopy(object):
             if pull:
                 scp.get(full_remote_path, self.src)
             else:
-                scp.put(self.src, full_remote_path)
+                scp.put(self.src, full_remote_path, progress=progress_callback)
         except:
             raise FileTransferError(
                 'Could not transfer file. There was an error during transfer. Please make sure remote permissions are set.')
@@ -153,8 +153,8 @@ class FileCopy(object):
 
         return True
 
-    def send(self):
-        self.transfer_file()
+    def send(self, progress_callback=None):
+        self.transfer_file(progress_callback=progress_callback)
 
     def get(self):
         self.transfer_file(pull=True)
