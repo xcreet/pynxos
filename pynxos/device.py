@@ -153,7 +153,7 @@ class Device(object):
             return True
         return False
 
-    def file_copy(self, src, dest=None, file_system='bootflash:'):
+    def file_copy(self, src, dest=None, file_system='bootflash:', progress_callback=None):
         """Send a local file to the device.
 
         Args:
@@ -167,7 +167,7 @@ class Device(object):
                 remote fle. Defaults to bootflash:'.
         """
         fc = FileCopy(self, src, dst=dest, file_system=file_system)
-        fc.send()
+        fc.send(progress_callback=progress_callback)
 
     def _disable_confirmation(self):
         self.show('terminal dont-ask')
