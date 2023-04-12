@@ -53,8 +53,8 @@ class RPCClient(object):
                                  verify=self.verify)
 
 
-        response_list = response.text
-        print(response_list)
+        response_list = response.json()
+        print(response.text)
         
         if isinstance(response_list, dict):
             response_list = [response_list]
