@@ -52,6 +52,7 @@ class RPCClient(object):
                                  auth=HTTPBasicAuth(self.username, self.password),
                                  verify=self.verify)
 
+        print(response.text)
         response_list = response.json()
 
         if isinstance(response_list, dict):
