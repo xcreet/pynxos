@@ -42,9 +42,9 @@ class RPCClient(object):
     def send_request(self, commands, method=u'cli', timeout=30):
         timeout=int(timeout)
         payload_list = self._build_payload(commands, method)
-        print(f'connecting with headers:')
-        print(self.headers)
-        print(payload_list)
+#         print(f'connecting with headers:')
+#         print(self.headers)
+#         print(payload_list)
         response = requests.post(self.url,
                                  timeout=timeout,
                                  data=json.dumps(payload_list),
